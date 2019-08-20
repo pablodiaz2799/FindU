@@ -1,1 +1,28 @@
-<p>signup works!</p>
+<form [formGroup]="form" (ngSubmit)="login()">
+    <div *ngIf="form.errors" class="alert alert-danger">Email or Password is invalid</div>
+    <div class="form-group">
+        <label for="txtEmail">Email</label>
+        <input formControlName="email"type="text" id="txtEmail" class="form-control" placeholder="Email">
+        <div *ngIf="email.pending">Checking for errors...</div>
+        <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">This is not a valid email</div>
+            <div *ngIf="email.errors.cannotContainSpace">Email must not contain spaces</div>
+            <div *ngIf="email.errors.dotCom">Email must end in '.com'</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="txtPass">Password</label>
+        <input type="password" formControlName="password" id="txtPass" class="form-control" placeholder="Password">
+        <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">Minimum length of 5 characters</div>
+            <div *ngIf="password.errors.cannotContainSpace">Password must not contain spaces</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" id="txtConfirm" class="form-control" placeholder="Confirm Password">
+    </div> 
+    <button class="btn btn-primary">SIGN UP</button> 
+</form>
